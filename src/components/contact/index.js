@@ -35,6 +35,12 @@ class Contact extends Component {
   handleEmailChange = e => this.setState({email: e.target.value});
   handlePhoneChange = e => this.setState({phone: e.target.value});
 
+  handleDelete = () => this.setState({status: "del"});
+  handleConfirm = (e) => {
+    e.preventDefault();
+    this.props.deleteHandler(this.state.phone);
+  };
+
   render() {
 
     let activeButtons = buttons.normal;
@@ -42,10 +48,15 @@ class Contact extends Component {
     let rightButtonHandler = this.handleDelete;
     let cardColor = "bg-white";
     if(this.state.status === "edit") {
-      cardColor = "bg-promary";
+      cardColor = "bg-primary";
       activeButtons = buttons.edit;
       leftButtonHandler = this.handleSave;
       rightButtonHandler = this.handleCancel;
+    } else if (this.state.status === "del") {
+      cardColor = "bg-warning";
+      activeButtons = buttons.delete;
+      leftButtonHandler = this.handleCancel;
+      rightButtonHandler = this.handleConfirm;
     }
 
     return (
