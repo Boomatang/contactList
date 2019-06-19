@@ -8,6 +8,7 @@ import ContactList from '../src/components/contactList';
 import { action } from '@storybook/addon-actions';
 import {MemoryRouter, Route} from "react-router-dom"
 import PublicProfile from "../src/components/contactPublic/publicProfile";
+import ContactPrivateDetails from '../src/components/contactPriavte';
 
 const sample = {
   name: {first:'Joe', last:'Bloggs'},
@@ -21,11 +22,11 @@ const sample = {
       longitude: "-97.3136"
     },
     timezone: {
-      offse: "-10:00",
+      offset: "-10:00",
       description: "Hawaii"
     }
   },
-  "login": {
+  login: {
     "uuid": "c4168eac-84b8-46ea-b735-c9da9bfb97fd",
     "username": "bluefrog786",
     "password": "ingrid",
@@ -73,6 +74,10 @@ storiesOf("Contact List App/Contact List", module)
   return <ContactList contacts={samples} />
 });
 
-storiesOf("Contact List App/Contact Page/PublicProfile").add("default", () => (
+storiesOf("Contact List App/Contact Page/PublicProfile", module).add("default", () => (
   <PublicProfile user={sample}/>
+));
+
+storiesOf("Contact List App/Contact Page/ContactPrivate", module).add("default", () => (
+  <ContactPrivateDetails user={sample}/>
 ));
